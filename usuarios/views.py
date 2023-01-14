@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.contrib import messages
+from django.contrib.messages import constants
 
 # Create your views here.
 def cadastro(request):
@@ -13,9 +15,11 @@ def cadastro(request):
         confirmar_senha = request.POST.get('confirmar_senha')
 
         if len(nome.strip())== 0 or len(email.strip())== 0 or len(senha.strip())== 0 or len(confirmar_senha.strip())== 0:
+            messages.add_message(request, constants.ERROR, 'Preencha todos os Campos!')
             return render(request, 'cadastro.html')
 
         if senha!= confirmar_senha:
+            messages.add_message(request, constants.ERROR, 'Digite senhas iguais!')
             return render(request,'cadastro.html')
 
         try:
@@ -24,8 +28,12 @@ def cadastro(request):
                 email=email,
                 password=senha,
             )
-            
+            messages.add_message(request, constants.SUCCESS, 'USUARIO CADASTRADO COM SUCESSO.')
             return render(request, 'cadastro.html')
         except:
+            messages.add_message(request, constants.ERROR, 'ERRO NO SISTEMA, TENTE NOVAMENTE MAIS TARDE!')
             return render(request, 'cadastro.html')
-        # return HttpResponse('Teste')
+            
+def logar(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
