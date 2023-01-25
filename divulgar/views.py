@@ -35,3 +35,9 @@ def novo_pet(request):
         )
 
         pet.save()
+
+        for tag_id in tags:
+            tag = Tag.objects.get(id=tag_id)
+            pet.tags.add(tag)
+
+        pet.save()
