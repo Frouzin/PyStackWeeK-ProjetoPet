@@ -17,4 +17,9 @@ def listar_pets(request):
 
         return render(request, 'listar_pets.html',{'pets':pets,'racas':racas, 'cidade':cidade, 'raca_filter':raca_filter})
 
+# def ver_pet(request, id):
+#     if request.method == "GET":
+#         pet = Pet.objects.get(id = id)
+#         return render(request, 'ver_pet.html', {'pet': pet})
+
 # Create your views here.

@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/',include('usuarios.urls')),
     path('divulgar/', include('divulgar.urls')),
-    path('adotar/', include('adotar.urls'))
+    path('adotar/', include('adotar.urls')),
+    # path('ver_pet/<int:id>', views.ver_pet, name="ver_pet"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
